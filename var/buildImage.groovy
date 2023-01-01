@@ -1,4 +1,4 @@
-#!/use/bin/env groovy
+#!/usr/bin/env groovy
 
 def call() {
     echo 'bilding docker image...'
