@@ -11,10 +11,17 @@ class Docker implements Serializable { //supports saving state of excecution if 
 
     def buildDockerImage(String imgName) {
         script.echo 'bilding docker image...'
-        script.withCredentials([script.usernamePassword(credentialsId: '	Dockerhub-repo',passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
-            script.sh "docker build -t $imgName ."
+        script.sh "docker build -t $imgName ."
+
+    }
+
+    def dockerLogin() {
+        script.withCredentials([script.usernamePassword(credentialsId: '	Dockerhub-repo', passwordVariable: 'PASSWD', usernameVariable: 'USER')]) {
             script.sh "echo $script.PASSWD | docker login -u $script.USER --password-stdin"
-            script.sh "docker push ${imgName}"
         }
+    }
+
+    def dockerPush(String imgName) {
+        script.sh "docker push ${imgName}"
     }
 }

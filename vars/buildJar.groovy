@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
+import com.example.Package
 
 def call() {
-    echo "building the application for branch $BRANCH_NAME "
-    sh 'mvn package'
+    return new Package(this).buildJarFile()
 }
